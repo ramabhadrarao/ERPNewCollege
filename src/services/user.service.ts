@@ -11,34 +11,48 @@ const createAuthHeader = () => {
   return {};
 };
 
-interface User {
-  id?: number;
+export interface User {
+  id: number;
   username: string;
   email: string;
-  password?: string;
-  groupIds?: number[];
-  isActive?: boolean;
+  isActive: boolean;
   lastLogin?: Date;
-  groups?: any[];
+  groups: any[];
+}
+
+export interface CreateUserData {
+  username: string;
+  email: string;
+  password: string;
+  isActive?: boolean;
+  groupIds?: number[];
+}
+
+export interface UpdateUserData {
+  username?: string;
+  email?: string;
+  password?: string;
+  isActive?: boolean;
+  groupIds?: number[];
 }
 
 const userService = {
-  async getAll() {
+  async getAll(): Promise<User[]> {
     const response = await axios.get(`${API_URL}/users`, {
       headers: createAuthHeader()
     });
     return response.data;
   },
 
-  async create(user: User) {
-    const response = await axios.post(`${API_URL}/users`, user, {
+  async create(userData: CreateUserData): Promise<User> {
+    const response = await axios.post(`${API_URL}/users`, userData, {
       headers: createAuthHeader()
     });
     return response.data;
   },
 
-  async update(id: number, user: User) {
-    const response = await axios.put(`${API_URL}/users/${id}`, user, {
+  async update(id: number, userData: UpdateUserData): Promise<User> {
+    const response = await axios.put(`${API_URL}/users/${id}`, userData, {
       headers: createAuthHeader()
     });
     return response.data;

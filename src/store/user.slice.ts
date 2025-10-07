@@ -1,14 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import userService from '../services/user.service';
-
-interface User {
-  id: number;
-  username: string;
-  email: string;
-  isActive: boolean;
-  lastLogin?: Date;
-  groups: any[];
-}
+import userService, { User, CreateUserData, UpdateUserData } from '../services/user.service';
 
 interface UserState {
   users: User[];
@@ -31,14 +22,14 @@ export const fetchUsers = createAsyncThunk(
 
 export const createUser = createAsyncThunk(
   'users/create',
-  async (userData: Partial<User>) => {
+  async (userData: CreateUserData) => {
     return await userService.create(userData);
   }
 );
 
 export const updateUser = createAsyncThunk(
   'users/update',
-  async ({ id, data }: { id: number; data: Partial<User> }) => {
+  async ({ id, data }: { id: number; data: UpdateUserData }) => {
     return await userService.update(id, data);
   }
 );

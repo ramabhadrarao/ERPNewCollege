@@ -37,7 +37,7 @@ export const createGroup = createAsyncThunk(
 
 export const updateGroup = createAsyncThunk(
   'groups/update',
-  async ({ id, data }: { id: number; data: { name?: string; description?: string; permissionIds?: number[]; isActive?: boolean } }) => {
+  async ({ id, data }: { id: number; data: { name: string; description?: string; permissionIds?: number[]; isActive?: boolean } }) => {
     return await groupService.update(id, data);
   }
 );

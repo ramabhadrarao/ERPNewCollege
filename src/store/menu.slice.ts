@@ -41,7 +41,7 @@ export const createMenuItem = createAsyncThunk(
 
 export const updateMenuItem = createAsyncThunk(
   'menus/update',
-  async ({ id, data }: { id: number; data: { name?: string; resource?: string; icon?: string; path?: string; parentId?: number | null; order?: number; isActive?: boolean } }) => {
+  async ({ id, data }: { id: number; data: { name: string; resource: string; icon?: string; path: string; parentId?: number | null; order?: number; isActive?: boolean } }) => {
     return await menuService.update(id, data);
   }
 );

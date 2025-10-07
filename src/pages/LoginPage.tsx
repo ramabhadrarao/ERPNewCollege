@@ -36,9 +36,14 @@ const LoginPage: React.FC = () => {
         <div className="card card-md">
           <div className="card-body">
             <h2 className="h2 text-center mb-4">Login to your account</h2>
+            {error && (
+              <div className="alert alert-danger" role="alert">
+                {error}
+              </div>
+            )}
             <form onSubmit={formik.handleSubmit}>
               <div className="mb-3">
-                <label className="form-label">Username</label>
+                <label className="form-label">Username (not email)</label>
                 <input
                   type="text"
                   className={`form-control ${
@@ -46,7 +51,7 @@ const LoginPage: React.FC = () => {
                       ? 'is-invalid'
                       : ''
                   }`}
-                  placeholder="Enter username"
+                  placeholder="Enter username (default: admin)"
                   {...formik.getFieldProps('username')}
                 />
                 {formik.touched.username && formik.errors.username && (
